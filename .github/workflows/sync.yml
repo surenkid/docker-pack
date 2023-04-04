@@ -3,7 +3,7 @@ name: Sync2DockerHub
 on:
   push:
     tags:
-      - '*/_*'
+      - '*-surenkid-*'
 
 jobs:
   sync:
