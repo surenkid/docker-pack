@@ -1,0 +1,57 @@
+name: Build and Push Docker Image
+
+on:
+  push:
+    tags:
+      - '*-surenkid-*'
+
+jobs:
+  build-and-push:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v2
+        
+      - name: Parse Image Name and Version from Tag
+        id: parse_tag
+        run: |
+          IFS='-' read -ra TAG <<< "$GITHUB_REF"
+          IMAGE_NAME=${TAG[0]}
+          IMAGE_VERSION=${TAG[2]}
+          echo "::set-output name=IMAGE_NAME::$IMAGE_NAME"
+          echo "::set-output name=IMAGE_VERSION::$IMAGE_VERSION"
+
+          tagName="$(echo ${{ github.ref }} | sed 's/refs\/tags\///')"
+          imageName="$(echo "${tagName}" | cut -d "-surenkid-" -f 1)"
+          imageTag="$(echo "${tagName}" | cut -d "-surenkid-" -f 2)"
+
+          echo "Image: $imageName, Tag: $imageTag"
+
+          echo "::set-output name=imageName::$imageName"
+          echo "::set-output name=imageTag::$imageTag"
+
+      - name: Check if the Dockerfile exists
+        run: |
+          if [ ! -f "${{ steps.parse_tag.outputs.IMAGE_NAME}}/Dockerfile" ]; then
+            echo "Error: Cannot find Dockerfile in ${{ steps.parse_tag.outputs.IMAGE_NAME}} directory."
+            exit 1
+          fi
+          
+      - name: Login to Docker Hub
+        uses: docker/login-action@v1
+        with:
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
+          
+      - name: Build and Push Docker Image
+        uses: docker/build-push-action@v2
+        with:
+          context: .
+          push: true
+          tags: surenkid/${{ steps.parse_tag.outputs.IMAGE_NAME }}:${{ steps.parse_tag.outputs.IMAGE_VERSION }}
+          file: ${{ steps.parse_tag.outputs.IMAGE_NAME }}/Dockerfile
+        env:
+          DOCKER_BUILDKIT: 1
+          DOCKER_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
+          DOCKER_PASSWORD: ${{ secrets.DOCKERHUB_PASSWORD }}
