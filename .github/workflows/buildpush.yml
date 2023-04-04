@@ -16,12 +16,6 @@ jobs:
       - name: Parse Image Name and Version from Tag
         id: parse_tag
         run: |
-          IFS='-' read -ra TAG <<< "$GITHUB_REF"
-          IMAGE_NAME=${TAG[0]}
-          IMAGE_VERSION=${TAG[2]}
-          echo "::set-output name=IMAGE_NAME::$IMAGE_NAME"
-          echo "::set-output name=IMAGE_VERSION::$IMAGE_VERSION"
-
           tagName="$(echo ${{ github.ref }} | sed 's/refs\/tags\///')"
           imageName="$(echo "${tagName}" | cut -d "-surenkid-" -f 1)"
           imageTag="$(echo "${tagName}" | cut -d "-surenkid-" -f 2)"
