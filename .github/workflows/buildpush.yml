@@ -1,9 +1,14 @@
 name: Build and Push Docker Image
 
 on:
-  push:
-    tags:
-      - '*-surenkid-*'
+  workflow_dispatch:
+    inputs:
+      image_name:
+        description: 'Enter image name'
+        required: true
+      image_version:
+        description: 'Enter image version'
+        required: true
 
 jobs:
   build-and-push:
@@ -13,20 +18,11 @@ jobs:
       - name: Checkout Code
         uses: actions/checkout@v2
         
-      - name: Debugging
-        env:
-          TAG_NAME: ${{ env.GITHUB_REF }}
-        run: |
-          echo "TAG_NAME=$TAG_NAME"
-          echo "Path exists? $(test -e "$TAG_NAME" && echo true || echo false)"
-        
       - name: Parse Image Name and Version from Tag
         id: parse_tag
         run: |
-          TAG_NAME="${{ github.ref_path }}"
-          IFS='-surenkid-' read -ra NAME_ARR <<< "$TAG_NAME"
-          IMAGE_NAME=${NAME_ARR[0]}
-          IMAGE_VERSION=${NAME_ARR[-1]}
+          IMAGE_NAME="${{ github.event.inputs.image_name }}"
+          IMAGE_VERSION="${{ github.event.inputs.image_version }}"
           echo "IMAGE_NAME=$IMAGE_NAME" >> $GITHUB_ENV
           echo "IMAGE_VERSION=$IMAGE_VERSION" >> $GITHUB_ENV
 
