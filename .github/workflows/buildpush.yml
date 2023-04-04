@@ -13,6 +13,13 @@ jobs:
       - name: Checkout Code
         uses: actions/checkout@v2
         
+      - name: Debugging
+        env:
+          TAG_NAME: ${{ github.ref_path }}
+        run: |
+          echo "TAG_NAME=$TAG_NAME"
+          echo "Path exists? $(test -e "$TAG_NAME" && echo true || echo false)"
+        
       - name: Parse Image Name and Version from Tag
         id: parse_tag
         run: |
