@@ -16,19 +16,17 @@ jobs:
       - name: Parse Image Name and Version from Tag
         id: parse_tag
         run: |
-          tagName="$(echo ${{ github.ref }} | sed 's/refs\/tags\///')"
-          imageName="$(echo "${tagName}" | cut -d "-surenkid-" -f 1)"
-          imageTag="$(echo "${tagName}" | cut -d "-surenkid-" -f 2)"
-
-          echo "Image: $imageName, Tag: $imageTag"
-
-          echo "::set-output name=imageName::$imageName"
-          echo "::set-output name=imageTag::$imageTag"
+          TAG_NAME="${{ github.ref_path }}"
+          IFS='-surenkid-' read -ra NAME_ARR <<< "$TAG_NAME"
+          IMAGE_NAME=${NAME_ARR[0]}
+          IMAGE_VERSION=${NAME_ARR[-1]}
+          echo "IMAGE_NAME=$IMAGE_NAME" >> $GITHUB_ENV
+          echo "IMAGE_VERSION=$IMAGE_VERSION" >> $GITHUB_ENV
 
       - name: Check if the Dockerfile exists
         run: |
-          if [ ! -f "${{ steps.parse_tag.outputs.IMAGE_NAME}}/Dockerfile" ]; then
-            echo "Error: Cannot find Dockerfile in ${{ steps.parse_tag.outputs.IMAGE_NAME}} directory."
+          if [ ! -f "${{ env.IMAGE_NAME }}/Dockerfile" ]; then
+            echo "Error: Cannot find Dockerfile in ${{ env.IMAGE_NAME }} directory."
             exit 1
           fi
           
@@ -43,8 +41,8 @@ jobs:
         with:
           context: .
           push: true
-          tags: surenkid/${{ steps.parse_tag.outputs.IMAGE_NAME }}:${{ steps.parse_tag.outputs.IMAGE_VERSION }}
-          file: ${{ steps.parse_tag.outputs.IMAGE_NAME }}/Dockerfile
+          tags: surenkid/${{ env.IMAGE_NAME }}:${{ env.IMAGE_VERSION }}
+          file: ${{ env.IMAGE_NAME }}/Dockerfile
         env:
           DOCKER_BUILDKIT: 1
           DOCKER_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
