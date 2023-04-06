@@ -6,9 +6,9 @@
 
 ## 同步镜像列表
 
-| 镜像名           | 镜像版本 | docker hub镜像地址            |
-|------------------|----------|----------------------------|
-| chatgpt-web-share | 0.3.3    | surenkid/chatgpt-web-share:0.3.3 |
+| 镜像名             | docker hub镜像地址            |
+|-------------------|----------------------------|
+| [chatgpt-web-share](https://github.com/moeakwak/chatgpt-web-share/pkgs/container/chatgpt-web-share) | surenkid/chatgpt-web-share:0.3.4 |
 
 请注意，我们无法对 Docker 镜像内容或任何引起的问题负责。本项目只是将 Docker 镜像同步到官方提供的 Docker Hub，没有做任何修改。我们保证镜像同步自官方且完整无损。
 
