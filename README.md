@@ -8,10 +8,10 @@
 
 | 镜像名             | docker hub镜像地址            |
 |-------------------|----------------------------|
-| [chatgpt-web-share](https://github.com/moeakwak/chatgpt-web-share/pkgs/container/chatgpt-web-share) | surenkid/chatgpt-web-share:0.3.4 |
+| [chatgpt-web-share](https://github.com/moeakwak/chatgpt-web-share/pkgs/container/chatgpt-web-share) | surenkid/chatgpt-web-share:0.3.5 |
 | [chatgpt-proxy-v4](https://github.com/acheong08/ChatGPT-Proxy-V4) | surenkid/chatgpt-proxy-v4:20230406 |
 | [dujiaoka](https://github.com/assimon/dujiaoka) | surenkid/dujiaoka:2.0.6 |
-| [vmq](https://github.com/szvone/Vmq) | surenkid/dujiaoka:1.6.1 |
+| [vmq](https://github.com/szvone/Vmq) | surenkid/vmq:1.6.1 |
 
 请注意，我们无法对 Docker 镜像内容或任何引起的问题负责。本项目只是将 Docker 镜像同步到官方提供的 Docker Hub，没有做任何修改。我们保证镜像同步自官方且完整无损。
 
