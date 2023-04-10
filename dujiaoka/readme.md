@@ -1,4 +1,8 @@
-## 部署说明
+## 项目源地址
+
+https://github.com/assimon/dujiaoka
+
+## 部署示例
 
 使用docker-compose
 ```
