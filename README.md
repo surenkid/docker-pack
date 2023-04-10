@@ -1,24 +1,34 @@
-# Sync2DockerHub
+好的，以下是更新后的 `README.md` 文件：
 
-该项目旨在通过 Github Action 自动拉取不同仓库的 Docker 镜像，并将其推送到 Docker Hub，以提高拉取速度和效率。
+# Docker Pack
 
-该项目由我们手工进行筛选和管理，以确保只有经过验证和信任的镜像被拉取和推送。如果您有其他想要同步的镜像，可以通过创建 Issue 来告诉我们。
+Docker Pack 是一个自动化的工具，它可以将 Github 上的开源项目打包成 Docker 镜像，并推送到 Docker Hub 中。这样其他人就可以通过 Docker 方式部署这些项目，从而简化了部署流程并提高了开发效率。
 
-## 同步镜像列表
+## 使用方法
 
-| 镜像名             | docker hub镜像地址            |
+使用 Docker Pack 非常简单，只需要fork本项目后，在项目根目录下创建一个目录，目录名为需打包 Docker 镜像的名称，再在文件夹内创建一个 Dockerfile 文件即可。当需要打包或更新镜像时，在 GitHub Actions 中启动 Workflow，并输入镜像名称（即目录名）和tag，Docker Pack 会自动读取您的 Dockerfile 文件，并构建、打包和推送 Docker 镜像。
+
+### 注意事项
+
+- 请确保您的 Dockerfile 文件能够成功构建，否则 Docker Pack 将无法构建镜像。
+- 请确保您的 Dockerfile 文件能够成功运行，否则您的 Docker 镜像可能无法正常工作。
+- 请注意保护您的 Docker Hub 凭证，避免凭证泄漏导致不必要的损失。
+
+## 直接使用作者打包的镜像
+
+您也可以直接使用本项目打包好的镜像，作者只对开源项目进行 docker 镜像打包，不做其他修改，保证安全性。以下是可以使用的镜像列表：
+
+| 源项目             | 可用镜像                 |
 |-------------------|----------------------------|
 | [chatgpt-web-share](https://github.com/moeakwak/chatgpt-web-share/pkgs/container/chatgpt-web-share) | surenkid/chatgpt-web-share:0.3.6 |
-| [chatgpt-proxy-v4](https://github.com/acheong08/ChatGPT-Proxy-V4) | surenkid/chatgpt-proxy-v4:20230406 |
+| [chatgpt-proxy-v4](https://github.com/acheong08/ChatGPT-Proxy-V4) | surenkid/chatgpt-proxy-v4:20230410 |
 | [dujiaoka](https://github.com/assimon/dujiaoka) | surenkid/dujiaoka:2.0.6 |
 | [vmq](https://github.com/szvone/Vmq) | surenkid/vmq:1.6.1 |
 
-请注意，我们无法对 Docker 镜像内容或任何引起的问题负责。本项目只是将 Docker 镜像同步到官方提供的 Docker Hub，没有做任何修改。我们保证镜像同步自官方且完整无损。
+### 提交 issue 或者 fork
 
-## 项目授权
+本项目作者直接打包好的镜像，仅根据作者需求选择，如果您有其他需要打包的镜像，可以提交 issue，或者 fork 本项目自行构建。
 
-本项目使用 MIT 授权协议，可以放心的拿去使用。如果您觉得该项目有帮助，欢迎在 Github 上关注并打星。
+## 许可证
 
-## 联系我们
-
-本项目的作者和维护人员非常乐意为您提供帮助和指导。如果您对该项目有疑问或建议，请随时联系我们。
+Docker Pack 采用 [MIT 许可证](LICENSE)。
