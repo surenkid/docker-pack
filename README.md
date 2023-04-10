@@ -1,5 +1,3 @@
-好的，以下是更新后的 `README.md` 文件：
-
 # Docker Pack
 
 Docker Pack 是一个自动化的工具，它可以将 Github 上的开源项目打包成 Docker 镜像，并推送到 Docker Hub 中。这样其他人就可以通过 Docker 方式部署这些项目，从而简化了部署流程并提高了开发效率。
