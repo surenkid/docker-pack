@@ -8,7 +8,7 @@
 
 | 镜像名             | docker hub镜像地址            |
 |-------------------|----------------------------|
-| [chatgpt-web-share](https://github.com/moeakwak/chatgpt-web-share/pkgs/container/chatgpt-web-share) | surenkid/chatgpt-web-share:0.3.5 |
+| [chatgpt-web-share](https://github.com/moeakwak/chatgpt-web-share/pkgs/container/chatgpt-web-share) | surenkid/chatgpt-web-share:0.3.6 |
 | [chatgpt-proxy-v4](https://github.com/acheong08/ChatGPT-Proxy-V4) | surenkid/chatgpt-proxy-v4:20230406 |
 | [dujiaoka](https://github.com/assimon/dujiaoka) | surenkid/dujiaoka:2.0.6 |
 | [vmq](https://github.com/szvone/Vmq) | surenkid/vmq:1.6.1 |
