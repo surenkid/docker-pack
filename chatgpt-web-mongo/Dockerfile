@@ -1,7 +1,5 @@
-ARG tag_name=v2.11.10
-
 FROM alpine/git as builder
-RUN git clone --depth 1 --branch $tag_name https://github.com/Kerwin1202/chatgpt-web.git
+RUN git clone https://github.com/Kerwin1202/chatgpt-web.git
 WORKDIR /chatgpt-web
 
 # build front-end
