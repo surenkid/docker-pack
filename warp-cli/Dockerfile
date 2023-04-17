@@ -1,4 +1,4 @@
-FROM ubuntu:22.10-slim
+FROM ubuntu:22.10
 
 LABEL mantainer="galtjay<galtjay@foxmail.com>"
 
