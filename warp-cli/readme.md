@@ -9,7 +9,7 @@ https://watermelonwater.tech/cloudflare-warp%e7%9a%84docker%e6%96%b9%e6%a1%88%e4
 ## 部署示例
 
 使用docker-compose
-```
+```yaml
 version: "3.1"
 
 services:
