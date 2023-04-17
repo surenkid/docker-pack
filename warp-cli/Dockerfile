@@ -1,4 +1,4 @@
-FROM ubuntu:22.10
+FROM ubuntu:22.04
 
 LABEL mantainer="galtjay<galtjay@foxmail.com>"
 
@@ -12,7 +12,7 @@ RUN apt-get update && \
     echo "deb [arch=amd64 signed-by=/usr/share/keyrings/cloudflare-warp-archive-keyring.gpg] https://pkg.cloudflareclient.com/ jammy main" | \
         tee /etc/apt/sources.list.d/cloudflare-client.list && \
     apt-get update && \
-    apt-get install cloudflare-warp -y && \
+    apt-get install -y cloudflare-warp && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 
