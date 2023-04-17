@@ -22,8 +22,8 @@ services:
     deploy:
       resources:
         limits:
-          cpus: '0.25'
-          memory: 512M
+          cpus: '0.12'
+          memory: 256M
     ports:
       - "40000:40000"
     networks:
