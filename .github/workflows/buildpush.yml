@@ -8,7 +8,7 @@ on:
         required: true
       image_version:
         description: 'Enter image version'
-        required: true
+        required: false
 
 jobs:
   build-and-push:
@@ -22,7 +22,11 @@ jobs:
         id: parse_tag
         run: |
           IMAGE_NAME="${{ github.event.inputs.image_name }}"
-          IMAGE_VERSION="${{ github.event.inputs.image_version }}"
+          if [ -z "${{ github.event.inputs.image_version }}" ]; then
+            IMAGE_VERSION=$(date +%Y%m%d)
+          else
+            IMAGE_VERSION="${{ github.event.inputs.image_version }}"
+          fi
           echo "IMAGE_NAME=$IMAGE_NAME" >> $GITHUB_ENV
           echo "IMAGE_VERSION=$IMAGE_VERSION" >> $GITHUB_ENV
 
