@@ -16,10 +16,22 @@ RUN apt-get update && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 
-COPY warp.conf /etc/supervisor/conf.d/warp.conf
+RUN echo "[program:warp-svc]\n\
+command=/bin/bash -c /usr/bin/warp-svc\n\
+autostart=true\n\
+autorestart=true\n\
+startretries=3\n\
+stderr_logfile=/var/log/warp.log\n\
+stdout_logfile=/var/log/warp.log\n" > /etc/supervisor/conf.d/warp.conf
 
-COPY init.sh /init.sh
-RUN chmod +x /init.sh
+RUN echo  "#!/bin/bash\n\
+set -e\n\
+supervisord &\n\
+sleep 5\n\
+warp-cli --accept-tos register\n\
+warp-cli --accept-tos set-mode proxy\n\
+warp-cli --accept-tos connect\n\
+tail -f /var/log/warp.log\n" > /init.sh && chmod +x /init.sh
 
 EXPOSE 40000/tcp
 
