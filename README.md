@@ -22,6 +22,7 @@ Docker Pack 是一个自动化的工具，它可以将 Github 上的开源项目
 | [chatgpt-proxy-v4](https://github.com/surenkid/docker-pack/tree/main/chatgpt-proxy-v4) | surenkid/chatgpt-proxy-v4:20230410 |
 | [dujiaoka](https://github.com/surenkid/docker-pack/tree/main/dujiaoka) | surenkid/dujiaoka:2.0.6 |
 | [vmq](https://github.com/surenkid/docker-pack/tree/main/vmq) | surenkid/vmq:1.6.1 |
+| [warp-cli](https://github.com/surenkid/docker-pack/tree/main/warp-cli) | surenkid/warp-cli:202304171 |
 
 ### 提交 issue 或者 fork
 
