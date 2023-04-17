@@ -6,6 +6,7 @@ RUN apt-get update && \
     apt-get install -y --no-install-recommends \
         curl \
         gpg \
+        ca-certificates \
         supervisor && \
     curl https://pkg.cloudflareclient.com/pubkey.gpg | \
         gpg --yes --dearmor --output /usr/share/keyrings/cloudflare-warp-archive-keyring.gpg && \
