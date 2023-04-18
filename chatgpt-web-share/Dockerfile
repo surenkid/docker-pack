@@ -28,6 +28,6 @@ WORKDIR /app
 
 EXPOSE 80
 
-COPY startup.sh /app/startup.sh
+COPY /repo/startup.sh /app/startup.sh
 RUN chmod +x /app/startup.sh; mkdir /data
 CMD ["/app/startup.sh"]
