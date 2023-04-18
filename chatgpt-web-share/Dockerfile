@@ -3,12 +3,11 @@ WORKDIR /tmp/chatgptwebshare
 RUN apk add --no-cache git \
     && git clone https://github.com/moeakwak/chatgpt-web-share.git /tmp/chatgptwebshare
 
+
 FROM python:3.10-alpine
 
 ARG PIP_CACHE_DIR=/pip_cache
 ARG TARGETARCH
-
-COPY --from=fetchRepo /tmp/chatgptwebshare/ /repo/
 
 RUN mkdir -p /app/backend
 
@@ -17,17 +16,17 @@ RUN if [ "${TARGETARCH}" = "arm64" ] ; then \
         apk add --no-cache gcc musl-dev libffi-dev \
     ; fi
 
-COPY /repo/backend/requirements.txt /tmp/requirements.txt
+COPY --from=fetchRepo /tmp/chatgptwebshare/backend/requirements.txt /tmp/requirements.txt
 RUN pip install -r /tmp/requirements.txt
 
-COPY /repo/Caddyfile /app/Caddyfile
-COPY /repo/backend /app/backend
-COPY /repo/frontend/dist /app/dist
+COPY --from=fetchRepo /tmp/chatgptwebshare/Caddyfile /app/Caddyfile
+COPY --from=fetchRepo /tmp/chatgptwebshare/backend /app/backend
+COPY --from=fetchRepo /tmp/chatgptwebshare/frontend/dist /app/dist
 
 WORKDIR /app
 
 EXPOSE 80
 
-COPY /repo/startup.sh /app/startup.sh
+COPY --from=fetchRepo /tmp/chatgptwebshare/startup.sh /app/startup.sh
 RUN chmod +x /app/startup.sh; mkdir /data
 CMD ["/app/startup.sh"]
