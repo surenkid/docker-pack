@@ -1,7 +1,6 @@
-FROM ubuntu as build
-RUN apt update && apt install -y wget git python3-setuptools \
-    && wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb \
-    && dpkg -i google-chrome-stable_current_amd64.deb || apt -f -y install \
+FROM ubuntu
+
+RUN apt update && apt install -y wget git python3-setuptools && wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb && dpkg -i google-chrome-stable_current_amd64.deb || apt -f -y install \
     && git clone https://github.com/ultrafunkamsterdam/undetected-chromedriver \
     && cd undetected-chromedriver \
     && python3 setup.py install \
@@ -14,13 +13,4 @@ RUN apt update && apt install -y wget git python3-setuptools \
     && apt clean \
     && rm -rf /var/lib/apt/lists/*
 
-
-FROM ubuntu as runtime
-COPY --from=build /google-chrome-stable_current_amd64.deb /
-COPY --from=build /undetected_chromedriver /
-RUN apt update \
-    && dpkg -i /google-chrome-stable_current_amd64.deb || apt -f -y install \
-    && rm /google-chrome-stable_current_amd64.deb \
-    && apt clean \
-    && rm -rf /var/lib/apt/lists/*
 CMD ["./undetected_chromedriver", "--allowed-ips=", "--allowed-origins=*"]
