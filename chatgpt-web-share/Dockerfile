@@ -21,7 +21,6 @@ RUN pip install -r /tmp/requirements.txt
 
 COPY --from=fetchRepo /tmp/chatgptwebshare/Caddyfile /app/Caddyfile
 COPY --from=fetchRepo /tmp/chatgptwebshare/backend /app/backend
-COPY --from=fetchRepo /tmp/chatgptwebshare/frontend/dist /app/dist
 
 WORKDIR /app
 
