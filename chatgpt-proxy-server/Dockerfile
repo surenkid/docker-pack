@@ -1,16 +1,31 @@
-FROM ubuntu
+FROM archlinux
 
-RUN apt update && apt install -y wget git python3-setuptools && wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb && dpkg -i google-chrome-stable_current_amd64.deb || apt -f -y install \
-    && git clone https://github.com/ultrafunkamsterdam/undetected-chromedriver \
-    && cd undetected-chromedriver \
-    && python3 setup.py install \
-    && (python3 example/example.py &) \
-    && while true; do [ -f ~/.local/share/undetected_chromedriver/undetected_chromedriver ] && cp ~/.local/share/undetected_chromedriver/undetected_chromedriver / && break || sleep 1; done \
-    && cd \
-    && rm -rf undetected-chromedriver \
-    && apt remove -y wget git python3-setuptools \
-    && rm -rf /usr/local/lib/python* \
-    && apt clean \
-    && rm -rf /var/lib/apt/lists/*
+ENV SUDO_USER_NAME linweiyuan
+ENV MIRROR_URL 'https://mirrors.bfsu.edu.cn/archlinux/$repo/os/$arch'
+
+RUN echo "Server = ${MIRROR_URL}" > /etc/pacman.d/mirrorlist \
+    && pacman -Sy --needed --noconfirm \
+    && pacman -S base-devel git --needed --noconfirm \
+    && useradd -m ${SUDO_USER_NAME} \
+    && echo "${SUDO_USER_NAME} ALL=(ALL) NOPASSWD: ALL" > /etc/sudoers \
+    && su ${SUDO_USER_NAME} -c 'cd \
+        && git clone https://aur.archlinux.org/google-chrome.git \
+        && cd google-chrome \
+        && source PKGBUILD \
+        && sudo pacman -Syu --asdeps --needed --noconfirm "${makedepends[@]}" "${depends[@]}" \
+        && makepkg -sir --noconfirm \
+        && cd \
+        && git clone https://github.com/ultrafunkamsterdam/undetected-chromedriver \
+        && cd undetected-chromedriver \
+        && sudo pacman -S --needed --noconfirm python python-setuptools \
+        && sudo python setup.py install \
+        && (python example/example.py &) \
+        && while true; do [ -f ~/.local/share/undetected_chromedriver/undetected_chromedriver ] && sudo cp ~/.local/share/undetected_chromedriver/undetected_chromedriver / && break || sleep 1; done \
+        && cd \
+        && sudo rm -rf google-chrome undetected-chromedriver \
+    ' \
+    && pacman -Rs --noconfirm python-setuptools python git base-devel \
+    && rm -rf /usr/lib/python* \
+    && echo -e "y\nY" | pacman -Scc
 
 CMD ["./undetected_chromedriver", "--allowed-ips=", "--allowed-origins=*"]
