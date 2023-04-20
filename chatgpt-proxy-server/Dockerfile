@@ -1,10 +1,8 @@
 FROM archlinux
 
 ENV SUDO_USER_NAME linweiyuan
-ENV MIRROR_URL 'https://mirrors.bfsu.edu.cn/archlinux/$repo/os/$arch'
 
-RUN echo "Server = ${MIRROR_URL}" > /etc/pacman.d/mirrorlist \
-    && pacman -Sy --needed --noconfirm \
+RUN pacman -Sy --needed --noconfirm \
     && pacman -S base-devel git --needed --noconfirm \
     && useradd -m ${SUDO_USER_NAME} \
     && echo "${SUDO_USER_NAME} ALL=(ALL) NOPASSWD: ALL" > /etc/sudoers \
