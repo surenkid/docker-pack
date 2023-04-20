@@ -20,7 +20,7 @@ Docker Pack 是一个自动化的工具，它可以将 Github 上的开源项目
 |-------------------|----------------------------|
 | [chatgpt-web-share](https://github.com/surenkid/docker-pack/tree/main/chatgpt-web-share) | [surenkid/chatgpt-web-share](https://hub.docker.com/r/surenkid/chatgpt-web-share/tags) |
 | [chatgpt-proxy-server](https://github.com/surenkid/docker-pack/tree/main/chatgpt-proxy-server) | [surenkid/chatgpt-proxy-server](https://hub.docker.com/r/surenkid/chatgpt-proxy-server/tags) |
-| [go-chatgpt-api](https://github.com/surenkid/docker-pack/tree/main/go-chatgpt-api) | [surenkid/dujiaoka](https://hub.docker.com/r/surenkid/go-chatgpt-api/tags) |
+| [go-chatgpt-api](https://github.com/surenkid/docker-pack/tree/main/go-chatgpt-api) | [surenkid/go-chatgpt-api](https://hub.docker.com/r/surenkid/go-chatgpt-api/tags) |
 | [dujiaoka](https://github.com/surenkid/docker-pack/tree/main/dujiaoka) | [surenkid/dujiaoka](https://hub.docker.com/r/surenkid/dujiaoka/tags) |
 | [vmq](https://github.com/surenkid/docker-pack/tree/main/vmq) | [surenkid/vmq](https://hub.docker.com/r/surenkid/vmq/tags) |
 | [warp-cli](https://github.com/surenkid/docker-pack/tree/main/warp-cli) | [surenkid/warp-cli](https://hub.docker.com/r/surenkid/warp-cli/tags) |
