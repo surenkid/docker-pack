@@ -18,12 +18,12 @@ Docker Pack 是一个自动化的工具，它可以将 Github 上的开源项目
 
 | 源项目             | 可用镜像                 |
 |-------------------|----------------------------|
-| [chatgpt-web-share](https://github.com/surenkid/docker-pack/tree/main/chatgpt-web-share) | surenkid/chatgpt-web-share:0.3.10 |
-| [chatgpt-proxy-v4](https://github.com/surenkid/docker-pack/tree/main/chatgpt-proxy-v4) | surenkid/chatgpt-proxy-v4:20230410 |
-| [chatgpt-proxy-server](https://github.com/surenkid/docker-pack/tree/main/chatgpt-proxy-server4) | surenkid/chatgpt-proxy-server:20230418 |
-| [dujiaoka](https://github.com/surenkid/docker-pack/tree/main/dujiaoka) | surenkid/dujiaoka:2.0.6 |
-| [vmq](https://github.com/surenkid/docker-pack/tree/main/vmq) | surenkid/vmq:1.6.1 |
-| [warp-cli](https://github.com/surenkid/docker-pack/tree/main/warp-cli) | surenkid/warp-cli:202304171 |
+| [chatgpt-web-share](https://github.com/surenkid/docker-pack/tree/main/chatgpt-web-share) | [surenkid/chatgpt-web-share](https://hub.docker.com/r/surenkid/chatgpt-web-share/tags) |
+| [chatgpt-proxy-v4](https://github.com/surenkid/docker-pack/tree/main/chatgpt-proxy-v4) | [surenkid/chatgpt-proxy-v4](https://hub.docker.com/r/surenkid/chatgpt-proxy-v4/tags) |
+| [chatgpt-proxy-server](https://github.com/surenkid/docker-pack/tree/main/chatgpt-proxy-server) | [surenkid/chatgpt-proxy-server](https://hub.docker.com/r/surenkid/chatgpt-proxy-server/tags) |
+| [dujiaoka](https://github.com/surenkid/docker-pack/tree/main/dujiaoka) | [surenkid/dujiaoka](https://hub.docker.com/r/surenkid/dujiaoka/tags) |
+| [vmq](https://github.com/surenkid/docker-pack/tree/main/vmq) | [surenkid/vmq](https://hub.docker.com/r/surenkid/vmq/tags) |
+| [warp-cli](https://github.com/surenkid/docker-pack/tree/main/warp-cli) | [surenkid/warp-cli](https://hub.docker.com/r/surenkid/warp-cli/tags) |
 
 ### 提交 issue 或者 fork
 
