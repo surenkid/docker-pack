@@ -25,7 +25,7 @@ services:
       - chatgptproxyserver2ktsee
       
   chatgptproxyserver2ktsee:
-    image: surenkid/undetected-chromedriver:20230511
+    image: surenkid/undetected-chromedriver:latest
     container_name: chatgptproxyserver2ktsee
     hostname: chatgptproxyserver2ktsee
     restart: unless-stopped
