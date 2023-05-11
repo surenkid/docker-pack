@@ -16,15 +16,14 @@ Docker Pack 是一个自动化的工具，它可以将 Github 上的开源项目
 
 您也可以直接使用本项目打包好的镜像，作者只对开源项目进行 docker 镜像打包，不做其他修改，保证安全性。以下是可以使用的镜像列表：
 
-| 源项目             | 可用镜像                 |
-|-------------------|----------------------------|
-| chatgpt-web-share | [surenkid/chatgpt-web-share](https://hub.docker.com/r/surenkid/chatgpt-web-share/tags) |
-| chatgpt-proxy-server | [surenkid/chatgpt-proxy-server](https://hub.docker.com/r/surenkid/chatgpt-proxy-server/tags) |
-| go-chatgpt-api | [surenkid/go-chatgpt-api](https://hub.docker.com/r/surenkid/go-chatgpt-api/tags) |
-| dujiaoka | [surenkid/dujiaoka](https://hub.docker.com/r/surenkid/dujiaoka/tags) |
-| vmq | [surenkid/vmq](https://hub.docker.com/r/surenkid/vmq/tags) |
-| warp-cli | [surenkid/warp-cli](https://hub.docker.com/r/surenkid/warp-cli/tags) |
-| chatgpt-proxy-v4 | [surenkid/chatgpt-proxy-v4](https://hub.docker.com/r/surenkid/chatgpt-proxy-v4/tags) |
+- [surenkid/chatgpt-web-share](https://hub.docker.com/r/surenkid/chatgpt-web-share/tags)
+- [surenkid/chatgpt-wework-robot](https://hub.docker.com/r/surenkid/chatgpt-wework-robot/tags)
+- [surenkid/openai-api-proxy-key-pool](https://hub.docker.com/r/surenkid/openai-api-proxy-key-pool/tags)
+- [surenkid/go-chatgpt-api](https://hub.docker.com/r/surenkid/go-chatgpt-api/tags)
+- [surenkid/undetected-chromedriver](https://hub.docker.com/r/surenkid/undetected-chromedriver/tags)
+- [surenkid/dujiaoka](https://hub.docker.com/r/surenkid/dujiaoka/tags)
+- [surenkid/vmq](https://hub.docker.com/r/surenkid/vmq/tags)
+- [surenkid/warp-cli](https://hub.docker.com/r/surenkid/warp-cli/tags)
 
 ### 提交 issue 或者 fork
 
