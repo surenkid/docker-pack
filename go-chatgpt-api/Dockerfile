@@ -1,8 +1,17 @@
-FROM golang:alpine3.17 AS build
-WORKDIR /go/src/app
+FROM alpine AS fetchRepo
+WORKDIR /tmp/go-chatgpt-api
 RUN apk add --no-cache git \
-    && go install -ldflags="-w -s" github.com/linweiyuan/go-chatgpt-api@latest
+    && git clone -b legacy https://github.com/linweiyuan/go-chatgpt-api.git /tmp/go-chatgpt-api
 
-FROM alpine:3.17.3
-COPY --from=build /go/bin/go-chatgpt-api /go-chatgpt-api
-CMD ["/go-chatgpt-api"]
+FROM golang:alpine AS builder
+WORKDIR /app
+COPY --from=fetchRepo /tmp/go-chatgpt-api/ .
+RUN go build -ldflags="-w -s" -o go-chatgpt-api main.go
+
+FROM alpine
+WORKDIR /app
+COPY --from=builder /app/go-chatgpt-api .
+RUN apk add --no-cache tzdata
+ENV TZ=Asia/Shanghai
+EXPOSE 8080
+CMD ["/app/go-chatgpt-api"]
