@@ -3,3 +3,31 @@ go-chatgpt-api 是一个使用 undetected_chromedriver 绕过 Cloudflare 验证�
 
 ## 项目源地址
 - https://github.com/linweiyuan/go-chatgpt-api
+
+## 部署示例
+使用docker-compose部署
+```yaml
+version: "3.1"
+
+services:
+  gochatgptapi2ktsee:
+    image: surenkid/go-chatgpt-api:latest
+    container_name: gochatgptapi2ktsee
+    hostname: gochatgptapi2ktsee
+    restart: unless-stopped
+    network_mode: bridge
+    ports:
+      - 8124:8080
+    environment:
+      - GIN_MODE=release
+      - CHATGPT_PROXY_SERVER=http://chatgptproxyserver2ktsee:9515
+    depends_on:
+      - chatgptproxyserver2ktsee
+      
+  chatgptproxyserver2ktsee:
+    image: surenkid/undetected-chromedriver:20230511
+    container_name: chatgptproxyserver2ktsee
+    hostname: chatgptproxyserver2ktsee
+    restart: unless-stopped
+    network_mode: bridge
+```
