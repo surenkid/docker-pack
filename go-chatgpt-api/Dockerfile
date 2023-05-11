@@ -1,5 +1,4 @@
 FROM alpine AS fetchRepo
-WORKDIR /tmp/go-chatgpt-api
 RUN apk add --no-cache git \
     && git clone -b legacy https://github.com/linweiyuan/go-chatgpt-api.git /tmp/surenkid
 

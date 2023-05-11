@@ -1,6 +1,6 @@
 FROM archlinux
 
-ENV SUDO_USER_NAME linweiyuan
+ENV SUDO_USER_NAME surenkid
 
 RUN pacman -Sy --needed --noconfirm \
     && pacman -S base-devel git --needed --noconfirm \
