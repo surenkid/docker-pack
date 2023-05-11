@@ -22,12 +22,12 @@ services:
       - GIN_MODE=release
       - CHATGPT_PROXY_SERVER=http://chatgptproxyserver2ktsee:9515
     depends_on:
-      - chatgptproxyserver2ktsee
+      - undetectedchromedriver2ktsee
       
-  chatgptproxyserver2ktsee:
+  undetectedchromedriver2ktsee:
     image: surenkid/undetected-chromedriver:latest
-    container_name: chatgptproxyserver2ktsee
-    hostname: chatgptproxyserver2ktsee
+    container_name: undetectedchromedriver2ktsee
+    hostname: undetectedchromedriver2ktsee
     restart: unless-stopped
     network_mode: bridge
 ```
