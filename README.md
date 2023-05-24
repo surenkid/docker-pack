@@ -22,6 +22,7 @@ Docker Pack 是一个自动化的工具，它可以将 Github 上的开源项目
 - [surenkid/go-chatgpt-api](https://hub.docker.com/r/surenkid/go-chatgpt-api/tags)
 - [surenkid/undetected-chromedriver](https://hub.docker.com/r/surenkid/undetected-chromedriver/tags)
 - [surenkid/chatgpt-proxy-v4](https://hub.docker.com/r/surenkid/chatgpt-proxy-v4/tags)
+- [surenkid/chatgpt-to-api](https://hub.docker.com/r/surenkid/chatgpt-to-api/tags)
 - [surenkid/dujiaoka](https://hub.docker.com/r/surenkid/dujiaoka/tags)
 - [surenkid/vmq](https://hub.docker.com/r/surenkid/vmq/tags)
 - [surenkid/warp-cli](https://hub.docker.com/r/surenkid/warp-cli/tags)
