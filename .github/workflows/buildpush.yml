@@ -49,10 +49,9 @@ jobs:
         with:
           context: .
           push: true
-          registry: docker.io
           tags: |
-            surenkid/${{ env.IMAGE_NAME }}:${{ env.IMAGE_VERSION }}
-            surenkid/${{ env.IMAGE_NAME }}:latest
+            docker.io/surenkid/${{ env.IMAGE_NAME }}:${{ env.IMAGE_VERSION }}
+            docker.io/surenkid/${{ env.IMAGE_NAME }}:latest
           file: ${{ env.IMAGE_NAME }}/Dockerfile
         env:
           DOCKER_BUILDKIT: 1
