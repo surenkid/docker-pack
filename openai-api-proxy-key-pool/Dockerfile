@@ -1,8 +1,23 @@
-FROM golang:alpine3.17 AS build
-WORKDIR /go/src/app
+ARG APP_NAME=openai-api-proxy-key-pool
+
+FROM alpine AS fetchRepo
 RUN apk add --no-cache git \
-    && go install github.com/surenkid/openai-api-proxy-key-pool@latest
+    && git clone https://github.com/surenkid/${APP_NAME}.git /tmp/${APP_NAME}
+
+FROM golang:alpine3.17 AS build
+ARG APP_NAME
+WORKDIR /app
+COPY --from=fetchRepo /tmp/${APP_NAME}/ .
+ENV GO111MODULE=on
+ENV CGO_ENABLED=0
+RUN go build -ldflags="-w -s" -o ${APP_NAME} main.go
 
 FROM alpine:3.17.3
-COPY --from=build /go/bin/openai-api-proxy-key-pool /openai-api-proxy-key-pool
-CMD ["/openai-api-proxy-key-pool"]
+ARG APP_NAME
+WORKDIR /app
+COPY --from=build /app/${APP_NAME} .
+RUN apk add --no-cache ca-certificates tzdata \
+    && update-ca-certificates
+ENV TZ=Asia/Shanghai
+EXPOSE 8124
+CMD ["/app/${APP_NAME}"]
