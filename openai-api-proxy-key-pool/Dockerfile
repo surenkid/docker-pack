@@ -1,17 +1,8 @@
-FROM alpine AS fetchRepo
-RUN apk add --no-cache git \
-    && git clone https://github.com/surenkid/openai-api-proxy-key-pool.git /tmp/surenkid
-
 FROM golang:alpine3.17 AS build
-WORKDIR /app
-COPY --from=fetchRepo /tmp/surenkid/ .
-RUN go build -ldflags="-w -s" -o openai-api-proxy-key-pool main.go
+WORKDIR /go/src/app
+RUN apk add --no-cache git \
+    && go install github.com/surenkid/openai-api-proxy-key-pool@latest
 
 FROM alpine:3.17.3
-WORKDIR /app
-COPY --from=build /app/openai-api-proxy-key-pool .
-RUN apk add --no-cache ca-certificates tzdata \
-    && update-ca-certificates
-ENV TZ=Asia/Shanghai
-EXPOSE 8124
-CMD ["/app/openai-api-proxy-key-pool"]
+COPY --from=build /go/bin/openai-api-proxy-key-pool /openai-api-proxy-key-pool
+CMD ["/openai-api-proxy-key-pool"]
