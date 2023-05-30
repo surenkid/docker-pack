@@ -9,7 +9,8 @@ FROM golang:alpine3.17 AS build
 ARG APP_NAME
 WORKDIR /app
 COPY --from=fetchRepo /tmp/surenkid/ .
-RUN go build -ldflags="-w -s" -o ${APP_NAME} main.go
+RUN ls -la && cat main.go && cat config.go && cat proxy_handler.go && \
+    go build -ldflags="-w -s" -o ${APP_NAME} main.go
 
 FROM alpine:3.17.3
 ARG APP_NAME
