@@ -1,11 +1,12 @@
 ARG APP_NAME=openai-api-proxy-key-pool
 
 FROM alpine AS fetchRepo
+ENV APP_NAME=${APP_NAME}
 RUN apk add --no-cache git \
     && git clone https://github.com/surenkid/${APP_NAME}.git /tmp/${APP_NAME}
 
 FROM golang:alpine3.17 AS build
-ARG APP_NAME
+ENV APP_NAME=${APP_NAME}
 WORKDIR /app
 COPY --from=fetchRepo /tmp/${APP_NAME}/ .
 ENV GO111MODULE=on
@@ -13,7 +14,7 @@ ENV CGO_ENABLED=0
 RUN go build -ldflags="-w -s" -o ${APP_NAME} main.go
 
 FROM alpine:3.17.3
-ARG APP_NAME
+ENV APP_NAME=${APP_NAME}
 WORKDIR /app
 COPY --from=build /app/${APP_NAME} .
 RUN apk add --no-cache ca-certificates tzdata \
