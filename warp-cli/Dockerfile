@@ -7,6 +7,7 @@ RUN apt-get update && \
         curl \
         gpg \
         ca-certificates \
+        socat \
         tini && \
     curl https://pkg.cloudflareclient.com/pubkey.gpg | \
         gpg --yes --dearmor --output /usr/share/keyrings/cloudflare-warp-archive-keyring.gpg && \
@@ -25,7 +26,9 @@ sleep 5\n\
 warp-cli --accept-tos register\n\
 warp-cli --accept-tos set-mode proxy\n\
 warp-cli --accept-tos connect\n\
-wait $warp_svc_pid\n" > /init.sh && chmod +x /init.sh
+socat TCP-LISTEN:40000,fork TCP:127.0.0.1:40000 &\n\
+socat_pid=$!\n\
+wait -n $warp_svc_pid $socat_pid\n" > /init.sh && chmod +x /init.sh
 
 EXPOSE 40000/tcp
 
