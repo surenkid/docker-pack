@@ -26,10 +26,11 @@ sleep 5\n\
 warp-cli --accept-tos register\n\
 warp-cli --accept-tos set-mode proxy\n\
 warp-cli --accept-tos connect\n\
-socat TCP-LISTEN:40000,fork TCP:127.0.0.1:40000 &\n\
+warp-cli --accept-tos enable-always-on\n\
+socat TCP-LISTEN:65535,fork TCP:127.0.0.1:40000 &\n\
 socat_pid=$!\n\
 wait -n $warp_svc_pid $socat_pid\n" > /init.sh && chmod +x /init.sh
 
-EXPOSE 40000/tcp
+EXPOSE 65535/tcp
 
 ENTRYPOINT ["tini", "--", "bash", "-c", "/init.sh"]
