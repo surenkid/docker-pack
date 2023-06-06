@@ -13,17 +13,10 @@ https://watermelonwater.tech/cloudflare-warp%e7%9a%84docker%e6%96%b9%e6%a1%88%e4
 version: "3.1"
 
 services:
-  warpcli2ktsee:
+  warpcli:
     image: surenkid/warp-cli:latest
-    container_name: warpcli2ktsee
-    hostname: warpcli2ktsee
+    container_name: warpcli
     restart: unless-stopped
-    network_mode: bridge
-    deploy:
-      resources:
-        limits:
-          cpus: '0.12'
-          memory: 256M
     ports:
-      - "65535:65535"
+      - "${WARPCLI_PORT:-65535}:65535"
 ```
