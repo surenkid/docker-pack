@@ -18,5 +18,5 @@ services:
     container_name: warpcli
     restart: unless-stopped
     ports:
-      - "${WARPCLI_PORT:-65535}:65535"
+      - "65535:65535"
 ```
