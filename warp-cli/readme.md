@@ -26,10 +26,4 @@ services:
           memory: 256M
     ports:
       - "40000:40000"
-    networks:
-      - ktseenet
-          
-networks:
-  ktseenet:
-    external: true
 ```
