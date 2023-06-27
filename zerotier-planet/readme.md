@@ -28,3 +28,4 @@ services:
 ```
 docker cp zerotier-planet:/app/bin/planet .
 ```
+面板默认账号密码为`admin / password`
