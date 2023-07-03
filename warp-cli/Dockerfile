@@ -24,11 +24,11 @@ set -e\n\
 warp_svc_pid=$!\n\
 sleep 5\n\
 warp-cli --accept-tos set-mode proxy\n\
-if [ -z \"\$TOKEN\" ]; then\n\
+if [ -z \"\$WARP_KEY\" ]; then\n\
     warp-cli --accept-tos register\n\
     warp-cli --accept-tos connect\n\
 else\n\
-    warp-cli --accept-tos teams-enroll-token \$TEAMS_ENROLL_TOKEN\n\
+    warp-cli --accept-tos teams-enroll-token \$WARP_KEY\n\
 fi\n\
 warp-cli --accept-tos enable-always-on\n\
 socat TCP-LISTEN:65535,fork TCP:127.0.0.1:40000 &\n\
