@@ -23,10 +23,13 @@ set -e\n\
 /usr/bin/warp-svc &\n\
 warp_svc_pid=$!\n\
 sleep 5\n\
-warp-cli --accept-tos register\n\
-warp-cli --accept-tos set-mode proxy\n\
-warp-cli --accept-tos connect\n\
-# warp-cli --accept-tos enable-always-on\n\
+register_and_connect() {\n\
+  warp-cli --accept-tos register\n\
+  warp-cli --accept-tos set-mode proxy\n\
+  warp-cli --accept-tos connect\n\
+  warp-cli --accept-tos enable-always-on\n\
+}\n\
+register_and_connect\n\
 socat TCP-LISTEN:65535,fork TCP:127.0.0.1:40000 &\n\
 socat_pid=$!\n\
 wait -n $warp_svc_pid $socat_pid\n" > /init.sh && chmod +x /init.sh
