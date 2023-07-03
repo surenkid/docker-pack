@@ -20,7 +20,7 @@ RUN apt-get update && \
 
 RUN echo "#!/bin/bash\n\
 set -e\n\
-/usr/bin/warp-svc &\n\
+/usr/bin/warp-svc | grep 'ERROR' &\n\
 warp_svc_pid=$!\n\
 sleep 5\n\
 register_and_connect() {\n\
