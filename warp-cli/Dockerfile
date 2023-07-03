@@ -28,6 +28,7 @@ register_and_connect() {\n\
   warp-cli --accept-tos set-mode proxy\n\
   warp-cli --accept-tos connect\n\
   warp-cli --accept-tos enable-always-on\n\
+  warp-cli --accept-tos account\n\
 }\n\
 register_and_connect\n\
 socat TCP-LISTEN:65535,fork TCP:127.0.0.1:40000 &\n\
