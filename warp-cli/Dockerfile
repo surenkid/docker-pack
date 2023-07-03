@@ -22,7 +22,7 @@ RUN echo "#!/bin/bash\n\
 set -e\n\
 /usr/bin/warp-svc &\n\
 warp_svc_pid=$!\n\
-sleep 5\n\
+sleep 10\n\
 register_and_connect() {\n\
   warp-cli --accept-tos register\n\
   warp-cli --accept-tos set-mode proxy\n\
