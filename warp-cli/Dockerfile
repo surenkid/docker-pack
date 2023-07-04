@@ -32,7 +32,9 @@ command=/bin/bash /init.sh\n\
 stdout_events_enabled=true\n\
 stderr_events_enabled=true\n\
 stdout_logfile=/dev/stdout\n\
+stdout_logfile_maxbytes=0\n\
 stderr_logfile=/dev/stderr\n\
+stderr_logfile_maxbytes=0\n\
 autorestart=false\n\
 priority=200\n\
 \n\
