@@ -18,7 +18,7 @@ RUN apt-get update && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 
-RUN echo_supervisord_conf > /etc/supervisord.conf && \
+RUN echo_supervisord_conf > /etc/supervisor/supervisord.conf && \
     echo "\
 [program:warp-svc]\n\
 command=/usr/bin/warp-svc\n\
@@ -39,7 +39,7 @@ command=socat TCP-LISTEN:65535,fork TCP:127.0.0.1:40000\n\
 stdout_events_enabled=true\n\
 stderr_events_enabled=true\n\
 autorestart=true\n\
-priority=300\n" >> /etc/supervisord.conf
+priority=300\n" >> /etc/supervisor/supervisord.conf
 
 RUN echo "#!/bin/bash\n\
 set -e\n\
@@ -61,4 +61,5 @@ done\n" > /init.sh && chmod +x /init.sh
 
 EXPOSE 65535/tcp
 
-ENTRYPOINT ["supervisord", "-c", "/etc/supervisord.conf"]
+ENTRYPOINT ["supervisord", "-n", "-c", "/etc/supervisor/supervisord.conf"]
+
