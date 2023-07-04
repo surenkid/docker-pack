@@ -18,11 +18,19 @@ RUN apt-get update && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 
-RUN echo "#!/bin/bash\n\
+RUN echo '#!/bin/bash\n\
 set -e\n\
-/usr/bin/warp-svc | grep 'ERROR' &\n\
-warp_svc_pid=\$!\n\
-sleep 5\n\
+\n\
+function start_warp_svc {\n\
+  /usr/bin/warp-svc 2>&1 | tee -a warp-svc.log | grep "ERROR" &\n\
+  echo $!  # 返回warp-svc的进程ID\n\
+}\n\
+\n\
+function start_socat {\n\
+  socat TCP-LISTEN:65535,fork TCP:127.0.0.1:40000 &\n\
+  echo $!  # 返回socat的进程ID\n\
+}\n\
+\n\
 register_and_connect() {\n\
   warp-cli --accept-tos register\n\
   warp-cli --accept-tos set-mode proxy\n\
@@ -30,22 +38,26 @@ register_and_connect() {\n\
   warp-cli --accept-tos enable-always-on\n\
   warp-cli --accept-tos account\n\
 }\n\
+\n\
+warp_svc_pid=$(start_warp_svc)\n\
+socat_pid=$(start_socat)\n\
+sleep 5\n\
+\n\
 register_and_connect\n\
-socat TCP-LISTEN:65535,fork TCP:127.0.0.1:40000 &\n\
-socat_pid=\$!\n\
+\n\
 while true; do\n\
-  if ! kill -0 \$warp_svc_pid 2>/dev/null; then\n\
-    echo \"warp_svc has exited, restarting it.\"\n\
-    /usr/bin/warp-svc | grep 'ERROR' &\n\
-    warp_svc_pid=\$!\n\
+  if ! kill -0 $warp_svc_pid 2>/dev/null; then\n\
+    echo "warp_svc has exited, restarting it."\n\
+    warp_svc_pid=$(start_warp_svc)\n\
   fi\n\
-  if [[ \$(warp-cli --accept-tos warp-stats | awk 'NR==3') == *GB ]]; then\n\
+  if [[ $(warp-cli --accept-tos warp-stats | awk "NR==3") == *GB ]]; then\n\
     warp-cli --accept-tos delete\n\
     register_and_connect\n\
   fi\n\
   sleep 300\n\
 done\n\
-wait -n \$warp_svc_pid \$socat_pid\n" > /init.sh && chmod +x /init.sh
+\n\
+wait -n $warp_svc_pid $socat_pid\n' > /init.sh && chmod +x /init.sh
 
 EXPOSE 65535/tcp
 
