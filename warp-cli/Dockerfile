@@ -38,30 +38,44 @@ stderr_logfile_maxbytes=0\n\
 autorestart=false\n\
 priority=200\n\
 \n\
+[program:check]\n\
+command=/bin/bash /check.sh\n\
+stdout_events_enabled=true\n\
+stderr_events_enabled=true\n\
+stdout_logfile=/dev/stdout\n\
+stdout_logfile_maxbytes=0\n\
+stderr_logfile=/dev/stderr\n\
+stderr_logfile_maxbytes=0\n\
+autorestart=true\n\
+startsecs=60\n\
+startretries=999999999\n\
+priority=300\n\
+\n\
 [program:socat]\n\
 command=socat TCP-LISTEN:65535,fork TCP:127.0.0.1:40000\n\
 stdout_events_enabled=true\n\
 stderr_events_enabled=true\n\
 autorestart=true\n\
-priority=300\n" >> /etc/supervisor/supervisord.conf
+priority=400\n" >> /etc/supervisor/supervisord.conf
 
 RUN echo "#!/bin/bash\n\
 set -e\n\
-register_and_connect() {\n\
+warp-cli --accept-tos register\n\
+warp-cli --accept-tos set-mode proxy\n\
+warp-cli --accept-tos connect\n\
+warp-cli --accept-tos enable-always-on\n\
+warp-cli --accept-tos account\n" > /init.sh && chmod +x /init.sh
+
+RUN echo "#!/bin/bash\n\
+set -e\n\
+if [[ \$(warp-cli --accept-tos warp-stats | awk 'NR==3') == *GB ]]; then\n\
+  warp-cli --accept-tos delete\n\
   warp-cli --accept-tos register\n\
   warp-cli --accept-tos set-mode proxy\n\
   warp-cli --accept-tos connect\n\
   warp-cli --accept-tos enable-always-on\n\
   warp-cli --accept-tos account\n\
-}\n\
-register_and_connect\n\
-while true; do\n\
-  if [[ \$(warp-cli --accept-tos warp-stats | awk 'NR==3') == *GB ]]; then\n\
-    warp-cli --accept-tos delete\n\
-    register_and_connect\n\
-  fi\n\
-  sleep 300\n\
-done\n" > /init.sh && chmod +x /init.sh
+fi\n" > /check.sh && chmod +x /check.sh
 
 EXPOSE 65535/tcp
 
