@@ -47,8 +47,6 @@ stdout_logfile_maxbytes=0\n\
 stderr_logfile=/dev/stderr\n\
 stderr_logfile_maxbytes=0\n\
 autorestart=true\n\
-startsecs=60\n\
-startretries=999999999\n\
 priority=300\n\
 \n\
 [program:socat]\n\
@@ -75,7 +73,8 @@ if [[ \$(warp-cli --accept-tos warp-stats | awk 'NR==3') == *GB ]]; then\n\
   warp-cli --accept-tos connect\n\
   warp-cli --accept-tos enable-always-on\n\
   warp-cli --accept-tos account\n\
-fi\n" > /check.sh && chmod +x /check.sh
+fi\n\
+sleep 60\n" > /check.sh && chmod +x /check.sh
 
 EXPOSE 65535/tcp
 
