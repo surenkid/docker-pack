@@ -68,7 +68,7 @@ RUN echo "#!/bin/bash\n\
 set -e\n\
 warp_stats=\$(warp-cli --accept-tos warp-stats | awk 'NR==3')\n\
 echo \$warp_stats\n\
-if [[ \$warp_stats == *GB ]]; then\n\
+if [[ \$warp_stats == *GB* ]]; then\n\
   warp-cli --accept-tos delete\n\
   warp-cli --accept-tos register\n\
   warp-cli --accept-tos set-mode proxy\n\
